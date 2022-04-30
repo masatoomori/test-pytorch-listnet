@@ -31,6 +31,7 @@ def listnet_loss(y_i, z_i):
 def make_dataset(n_train, n_valid, D):
 	ws = torch.randn(D, 1)
 
+	# 勾配を自動で計算する必要があるため、requires_grad=True にする
 	X_train = torch.randn(n_train, D, requires_grad=True)
 	X_valid = torch.randn(n_valid, D, requires_grad=True)
 
