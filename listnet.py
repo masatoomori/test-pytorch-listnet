@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 import numpy as np
+from sklearn import metrics
 
 class Net(nn.Module):
 	def __init__(self, D):
@@ -106,5 +107,5 @@ if __name__ == '__main__':
 		with torch.no_grad():
 			valid_pred = net(X_valid)
 			valid_swapped_pairs = swapped_pairs(valid_pred, ys_valid)
-			ndcg_score = ndcg(ys_valid, valid_pred).item()
+			ndcg_score = metrics.ndcg_score(ys_valid.numpy().reshape(1, -1), valid_pred.numpy().reshape(1, -1))
 			print(f"epoch: {epoch + 1} valid swapped pairs: {valid_swapped_pairs}/{n_valid * (n_valid - 1) // 2} ndcg: {ndcg_score:.4f}")
