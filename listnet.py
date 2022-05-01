@@ -60,19 +60,6 @@ def swapped_pairs(ys_pred, ys_target):
 	return swapped
 
 
-def ndcg(ys_true, ys_pred):
-	def dcg(ys_true, ys_pred):
-		argsort = torch.argsort(ys_pred, descending=True, dim=0)
-		ys_true_sorted = ys_true[argsort]
-		ret = 0
-		for i, l in enumerate(ys_true_sorted, 1):
-			ret += (2 ** l - 1) / np.log2(i + 1)
-		return ret
-	ideal_dcg = dcg(ys_true, ys_true)
-	pred_dcg = dcg(ys_true, ys_pred)
-	return pred_dcg / ideal_dcg
-
-
 if __name__ == '__main__':
 	n_train = 500
 	n_valid = 100
