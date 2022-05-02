@@ -94,9 +94,8 @@ def main():
 	optimizer = optim.Adam(net.parameters())
 
 	for epoch in range(n_epochs):
-		idx = torch.randperm(n_train)
-
 		# クエリ内で呼び出されるレコードの順序をランダムにする
+		idx = torch.randperm(n_train)
 		X_train = X_train[idx]
 		ys_train = ys_train[idx]
 
